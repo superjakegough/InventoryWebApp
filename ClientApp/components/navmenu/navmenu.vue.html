@@ -1,0 +1,52 @@
+<template>
+	<v-list>
+		<v-list-tile @click="" to="/">
+			<v-list-tile-action>
+				<v-icon>home</v-icon>
+			</v-list-tile-action>
+			<v-list-title-content>
+				<v-list-tile-title>Home</v-list-tile-title>
+			</v-list-title-content>
+		</v-list-tile>
+		<v-list-group>
+			<v-list-tile slot="activator">AT</v-list-tile>
+			<v-list-tile v-for="item in atItems" :key="item.title" @click="" :to="item.path">
+				<v-list-tile-action>
+					<v-icon>{{item.icon}}</v-icon>
+				</v-list-tile-action>
+				<v-list-tile-content>
+					<v-list-tile-title>
+						{{item.title}}
+					</v-list-tile-title>
+				</v-list-tile-content>
+			</v-list-tile>
+		</v-list-group>
+		<v-list-group>
+			<v-list-tile slot="activator">PDS</v-list-tile>
+			<v-list-tile v-for="item in pdsItems" :key="item.title" @click="" :to="item.path">
+				<v-list-tile-action>
+					<v-icon>{{item.icon}}</v-icon>
+				</v-list-tile-action>
+				<v-list-tile-content>
+					<v-list-tile-title>
+						{{item.title}}
+					</v-list-tile-title>
+				</v-list-tile-content>
+			</v-list-tile>
+		</v-list-group>
+		<v-list-group>
+			<v-list-tile slot="activator">WTAIL</v-list-tile>
+			<v-list-tile v-for="item in wtailItems" :key="item.title" @click="" :to="item.path">
+				<v-list-tile-action>
+					<v-icon>{{item.icon}}</v-icon>
+				</v-list-tile-action>
+				<v-list-tile-content>
+					<v-list-tile-title>
+						{{item.title}}
+					</v-list-tile-title>
+				</v-list-tile-content>
+			</v-list-tile>
+		</v-list-group>
+	</v-list>
+</template>
+<script src="./navmenu.ts"></script>

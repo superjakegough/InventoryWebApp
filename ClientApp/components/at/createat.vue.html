@@ -1,0 +1,25 @@
+﻿<template>
+	<v-layout justify-center text-xs-center>
+		<v-flex xs4>
+			<v-form ref="form" lazy-validation>
+				<h3>Create AT Reagent</h3>
+				<v-select v-model="reagent.name" :items="names" label="Name" :rules="[rules.required]" box v-on:change="setMinimum" />
+				<v-text-field v-model="reagent.supplier" label="Supplier" :rules="[rules.required]" box />
+				<v-text-field v-model="reagent.batch" label="Batch" :rules="[rules.required]" box />
+				<v-select v-model="reagent.validated" :items="validates" label="Validated" :rules="[rules.required]" box />
+				<v-menu lazy transition="scale-transition" full-width min-width="290px">
+					<v-text-field slot="activator" v-model="reagent.expiry" label="Expiry" append-icon="event" :rules="[rules.required]" readonly box />
+					<v-date-picker v-model="reagent.expiry" first-day-of-week="1" />
+				</v-menu>
+				<v-text-field v-model="reagent.minimum" label="Minimum" :rules="[rules.required]" disabled box />
+				<v-text-field v-model="reagent.quantity" label="Quantity" :rules="[rules.required, rules.number]" maxlength="5" box />
+				<v-btn color="secondary" v-on:click="createReagent">Submit</v-btn>
+				<v-btn color="secondary" v-on:click="clear">Clear</v-btn>
+				<v-btn color="secondary" v-on:click="cancel">Cancel</v-btn>
+				<v-alert :value="failed" type="error">Failed to create reagent!</v-alert>
+			</v-form>
+		</v-flex>
+	</v-layout>
+</template>
+
+<script src="./createat.ts"></script>

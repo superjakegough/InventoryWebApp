@@ -1,0 +1,24 @@
+﻿<template>
+	<v-layout justify-center text-xs-center>
+		<v-flex xs4>
+			<v-form ref="form" lazy-validation>
+				<h3>Edit PDS Reagent</h3>
+				<v-select v-model="after.name" :items="names" label="Name" :rules="[rules.required]" box disabled />
+				<v-text-field v-model="after.supplier" label="Supplier" :rules="[rules.required]" box disabled />
+				<v-text-field v-model="after.batch" label="Batch" :rules="[rules.required]" box disabled />
+				<v-select v-model="after.validated" :items="validates" label="Validated" :rules="[rules.required]" box />
+				<v-menu lazy transition="scale-transition" full-width min-width="290px">
+					<v-text-field slot="activator" v-model="after.expiry" label="Expiry" append-icon="event" :rules="[rules.required]" readonly box />
+					<v-date-picker v-model="after.expiry" first-day-of-week="1" />
+				</v-menu>
+				<v-text-field v-model="after.minimum" label="Minimum" :rules="[rules.required]" disabled box />
+				<v-text-field v-model="after.quantity" label="Quantity" :rules="[rules.required, rules.number]" maxlength="5" box />
+				<v-btn color="secondary" v-on:click="editReagent">Submit</v-btn>
+				<v-btn color="secondary" v-on:click="cancel">Cancel</v-btn>
+				<v-alert :value="failed" type="error">Failed to edit reagent!</v-alert>
+			</v-form>
+		</v-flex>
+	</v-layout>
+</template>
+
+<script src="./editpds.ts"></script>

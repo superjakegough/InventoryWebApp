@@ -33,8 +33,6 @@ export default class InventoryPDSComponent extends Vue {
 
 	warningColour(warning: number) {
 		switch (warning) {
-			case 0:
-				return "Black";
 			case 1:
 				return "Orange";
 			case 2:

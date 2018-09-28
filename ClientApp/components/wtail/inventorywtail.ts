@@ -12,9 +12,9 @@ export default class InventoryWTAILComponent extends Vue {
 	reagentSearch: string = "";
 	inventorySearch: string = "";
 	reagentHeaders: object[] = [
-		{ text: 'Name', value: 'name', sortable: false },
-		{ text: 'Minimum', value: 'minimum', sortable: false },
-		{ text: 'Quantity', value: 'quantity', sortable: false }
+		{ text: 'Name', value: 'name' },
+		{ text: 'Minimum', value: 'minimum' },
+		{ text: 'Quantity', value: 'quantity' }
 	];
 	inventoryHeaders: object[] = [
 		{ text: 'Name', value: 'name', sortable: false },

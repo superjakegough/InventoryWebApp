@@ -1,4 +1,4 @@
-﻿<template>
+<template>
 	<v-layout justify-center text-xs-center>
 		<v-flex xs4>
 			<v-form ref="form" lazy-validation>
@@ -11,7 +11,6 @@
 					<v-text-field slot="activator" v-model="reagent.expiry" label="Expiry" append-icon="event" :rules="[rules.required]" readonly box />
 					<v-date-picker v-model="reagent.expiry" first-day-of-week="1" />
 				</v-menu>
-				<v-text-field v-model="reagent.minimum" label="Minimum" :rules="[rules.required]" disabled box />
 				<v-text-field v-model="reagent.quantity" label="Quantity" :rules="[rules.required, rules.number]" maxlength="5" box />
 				<v-btn color="secondary" v-on:click="createReagent">Submit</v-btn>
 				<v-btn color="secondary" v-on:click="clear">Clear</v-btn>

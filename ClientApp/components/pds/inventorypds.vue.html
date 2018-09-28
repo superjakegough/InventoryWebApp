@@ -1,29 +1,25 @@
 <template>
-	<v-layout column justify-center>
-		<v-layout align-center justify-center>
-			<v-flex xs6 mb-4 class="elevation-1">
-				<v-toolbar flat class="tabletoolbar">
-					<v-toolbar-title>PDS Reagents</v-toolbar-title>
-					<v-spacer />
-					<v-text-field v-model="reagentSearch" append-icon="search" label="Search" single-line hide-details />
-					<v-spacer />
-					<v-btn flat color="secondary" v-on:click.native="createReagent">Create</v-btn>
-				</v-toolbar>
-				<v-data-table :headers="reagentHeaders" :items="stocks" :loading="loading" :search="reagentSearch" expand>
-					<v-progress-linear slot="progress" color="primary" indeterminate />
-					<template slot="items" slot-scope="props">
-						<tr @click="filterReagents(props.item.name)">
-							<td>{{ props.item.name }}</td>
-							<td>{{ props.item.minimum }}</td>
-							<td><font v-bind:style="{ color: warningColour(props.item.stockWarning) }">{{ props.item.quantity }}</font></td>
-						</tr>
-					</template>
-				</v-data-table>
-			</v-flex>
-		</v-layout>
-		<v-flex xs12 class="elevation-1">
+	<v-layout row wrap align-start justify-center>
+		<v-flex md3 xs10 ma-2 class="elevation-1">
 			<v-toolbar flat class="tabletoolbar">
-				<v-toolbar-title>PDS Inventory</v-toolbar-title>
+				<v-toolbar-title>PDS</v-toolbar-title>
+				<v-spacer />
+				<v-btn flat color="secondary" v-on:click.native="createReagent">Create</v-btn>
+			</v-toolbar>
+			<v-data-table :headers="reagentHeaders" :items="stocks" :loading="loading" expand>
+				<v-progress-linear slot="progress" color="primary" indeterminate />
+				<template slot="items" slot-scope="props">
+					<tr @click="filterReagents(props.item.name)">
+						<td>{{ props.item.name }}</td>
+						<td>{{ props.item.minimum }}</td>
+						<td><font v-bind:style="{ color: warningColour(props.item.stockWarning) }">{{ props.item.quantity }}</font></td>
+					</tr>
+				</template>
+			</v-data-table>
+		</v-flex>
+		<v-flex md8 xs10 ma-2 class="elevation-1">
+			<v-toolbar flat class="tabletoolbar">
+				<v-toolbar-title>Inventory</v-toolbar-title>
 				<v-spacer />
 				<v-text-field v-model="inventorySearch" append-icon="search" label="Search" single-line hide-details />
 			</v-toolbar>

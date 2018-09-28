@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -15,29 +15,41 @@ namespace InventoryWebApp.Controllers
     {
         [HttpGet]
         [Route("GetInventory")]
-        public List<Reagent> GetInventory()
+        public Tuple<List<Reagent>, List<Stock>> GetInventory()
         {
             DateTime date = DateTime.Today;
+            List<Reagent> reagents = new List<Reagent>();
+            List<Stock> stocks = new List<Stock>();
             string query = "SELECT * FROM WTAILInventoryTable;";
             using (SqlConnection conn = new SqlConnection(Connection.ConnString))
             {
                 try
                 {
                     conn.Open();
-                    List<Reagent> temp = conn.Query<Reagent>(query).ToList();
-                    foreach (Reagent r in temp)
-                    {
-                        r.DateWarning = CheckDate(date, r.Expiry);
-                        r.StockWarning = CheckStock(r.Quantity, r.Minimum);
-                    }
-                    return temp;
+                    reagents = conn.Query<Reagent>(query).ToList();
                 }
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex);
-                    return new List<Reagent>();
                 }
             }
+            foreach (KeyValuePair<string, int> kvp in Reagents)
+            {
+                Stock temp = new Stock();
+                temp.Name = kvp.Key;
+                temp.Minimum = kvp.Value;
+                foreach (Reagent r in reagents)
+                {
+                    r.DateWarning = CheckDate(date, r.Expiry);
+                    if (r.Name.Equals(kvp.Key))
+                    {
+                        temp.Quantity += r.Quantity;
+                    }
+                }
+                temp.StockWarning = CheckStock(temp.Quantity, temp.Minimum);
+                stocks.Add(temp);
+            }
+            return new Tuple<List<Reagent>, List<Stock>>(reagents, stocks);
         }
 
         [HttpGet]
@@ -112,8 +124,8 @@ namespace InventoryWebApp.Controllers
             if (reagent != null)
             {
                 string query = "IF NOT EXISTS (SELECT * FROM WTAILInventoryTable WHERE Name=@Name AND Supplier=@Supplier AND Batch=@Batch) " +
-                "INSERT INTO WTAILInventoryTable (Name, Supplier, Batch, Validated, Expiry, Quantity, Minimum)" +
-                "VALUES (@Name, @Supplier, @Batch, @Validated, @Expiry, @Quantity, @Minimum);";
+                "INSERT INTO WTAILInventoryTable (Name, Supplier, Batch, Validated, Expiry, Quantity)" +
+                "VALUES (@Name, @Supplier, @Batch, @Validated, @Expiry, @Quantity);";
                 using (SqlConnection conn = new SqlConnection(Connection.ConnString))
                 {
                     try
@@ -138,8 +150,8 @@ namespace InventoryWebApp.Controllers
         {
             if (reagent != null)
             {
-                string query = "INSERT INTO WTAILArchiveTable (Id, Name, Supplier, Batch, Validated, Expiry, Minimum, Quantity) " +
-                "VALUES (@Id, @Name, @Supplier, @Batch, @Validated, @Expiry, @Minimum, @Quantity);";
+                string query = "INSERT INTO WTAILArchiveTable (Id, Name, Supplier, Batch, Validated, Expiry, Quantity) " +
+                "VALUES (@Id, @Name, @Supplier, @Batch, @Validated, @Expiry, @Quantity);";
                 using (SqlConnection conn = new SqlConnection(Connection.ConnString))
                 {
                     try
@@ -319,5 +331,35 @@ namespace InventoryWebApp.Controllers
                 return 0;
             }
         }
+
+        public static Dictionary<string, int> Reagents = new Dictionary<string, int> {
+            { "C", 1 },
+            { "Cw", 1 },
+            { "c", 1 },
+            { "D", 10 },
+            { "E", 1 },
+            { "e", 1 },
+            { "C+D+E", 10 },
+            { "K", 1 },
+            { "k", 2 },
+            { "Jk-a", 3 },
+            { "Jk-b", 10 },
+            { "M", 3 },
+            { "N", 2 },
+            { "Lu-a", 2 },
+            { "Lu-b", 2 },
+            { "Fy-b", 4 },
+            { "s", 1 },
+            { "S", 5 },
+            { "Kpa", 1 },
+            { "2 Cell screen antibody", 15 },
+            { "Bromelain", 1 },
+            { "Dextran", 1 },
+            { "High titre control", 1 },
+            { "EXTRAN", 2 },
+            { "PK Cleaning Solution", 3 },
+            { "Syphilis Kits", 5 },
+            { "QC2 Syphilis Control", 5 },
+        };
     }
 }

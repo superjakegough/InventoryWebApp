@@ -1,4 +1,4 @@
-﻿namespace InventoryWebApp.Models
+namespace InventoryWebApp.Models
 {
     public class Reagent
     {
@@ -8,9 +8,7 @@
         public string Batch { get; set; }
         public string Validated { get; set; }
         public string Expiry { get; set; }
-        public int Minimum { get; set; }
         public int Quantity { get; set; }
-        public int StockWarning { get; set; }
         public int DateWarning { get; set; }
     }
 }

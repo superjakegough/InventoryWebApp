@@ -1,4 +1,4 @@
-﻿import Vue from 'vue';
+import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { Reagent } from '../../models/reagent';
 
@@ -21,8 +21,6 @@ export default class EditPDSComponent extends Vue {
 		validated: "",
 		expiry: "",
 		quantity: 0,
-		minimum: 0,
-		stockWarning: 0,
 		dateWarning: 0
 	}
 
@@ -34,8 +32,6 @@ export default class EditPDSComponent extends Vue {
 		validated: "",
 		expiry: "",
 		quantity: 0,
-		minimum: 0,
-		stockWarning: 0,
 		dateWarning: 0
 	}
 

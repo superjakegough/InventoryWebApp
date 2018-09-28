@@ -13,7 +13,6 @@ export default class ArchivePDSComponent extends Vue {
 		{ text: 'Batch', value: 'batch' },
 		{ text: 'Validated', value: 'validated' },
 		{ text: 'Expiry', value: 'expiry' },
-		{ text: 'Minimum', value: 'minimum' },
 		{ text: 'Quantity', value: 'quantity' }
 	];
 

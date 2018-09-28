@@ -15,7 +15,6 @@
 						<td>{{ props.item.batch }}</td>
 						<td>{{ props.item.validated }}</td>
 						<td><font v-bind:style="{ color: warningColour(props.item.dateWarning) }">{{ props.item.expiry }}</font></td>
-						<td>{{ props.item.minimum }}</td>
 						<td><font v-bind:style="{ color: warningColour(props.item.stockWarning) }">{{ props.item.quantity }}</font></td>
 					</tr>
 				</template>

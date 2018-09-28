@@ -1,9 +1,9 @@
-﻿<template>
+<template>
 	<v-layout justify-center text-xs-center>
 		<v-flex xs4>
 			<v-form ref="form" lazy-validation>
 				<h3>Edit AT Reagent</h3>
-				<v-select v-model="after.name" :items="names" label="Name" :rules="[rules.required]" box disabled />
+				<v-text-field v-model="after.name" label="Name" :rules="[rules.required]" box disabled />
 				<v-text-field v-model="after.supplier" label="Supplier" :rules="[rules.required]" box disabled />
 				<v-text-field v-model="after.batch" label="Batch" :rules="[rules.required]" box disabled />
 				<v-select v-model="after.validated" :items="validates" label="Validated" :rules="[rules.required]" box />
@@ -11,7 +11,6 @@
 					<v-text-field slot="activator" v-model="after.expiry" label="Expiry" append-icon="event" :rules="[rules.required]" readonly box />
 					<v-date-picker v-model="after.expiry" first-day-of-week="1" />
 				</v-menu>
-				<v-text-field v-model="after.minimum" label="Minimum" :rules="[rules.required]" disabled box />
 				<v-text-field v-model="after.quantity" label="Quantity" :rules="[rules.required, rules.number]" maxlength="5" box />
 				<v-btn color="secondary" v-on:click="editReagent">Submit</v-btn>
 				<v-btn color="secondary" v-on:click="cancel">Cancel</v-btn>

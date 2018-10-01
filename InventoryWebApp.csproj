@@ -16,11 +16,12 @@
     <None Remove="ClientApp\components\pds\editpds.ts" />
     <None Remove="ClientApp\components\wtail\editwtail.ts" />
     <None Remove="ClientApp\models\reagent.ts" />
+    <None Remove="ClientApp\models\stock.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
@@ -32,6 +33,7 @@
     <TypeScriptCompile Include="ClientApp\components\at\createat.ts" />
     <TypeScriptCompile Include="ClientApp\components\at\editat.ts" />
     <TypeScriptCompile Include="ClientApp\components\navmenu\navmenu.ts" />
+    <TypeScriptCompile Include="ClientApp\models\stock.ts" />
     <TypeScriptCompile Include="ClientApp\models\reagent.ts" />
   </ItemGroup>
 

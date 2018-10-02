@@ -1,6 +1,6 @@
 <template>
 	<v-layout justify-center text-xs-center>
-		<v-flex xl4 lg4 md6 xs8>
+		<v-flex lg4 sm6 xs8>
 			<v-form ref="form" lazy-validation>
 				<h3>Create WTAIL Reagent</h3>
 				<v-select v-model="reagent.name" :items="names" label="Name" :rules="[rules.required]" box v-on:change="setMinimum" />

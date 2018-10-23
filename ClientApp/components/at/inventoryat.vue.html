@@ -71,7 +71,7 @@
 					</template>
 				</v-data-table>
 			</v-card>
-			<v-text-field v-model="inventorySearch" append-icon="search" label="Search" single-line hide-details />
+			<v-text-field v-model="inventorySearch" append-icon="search" label="Search" single-line hide-details box/>
 		</v-flex>
 		<v-data-iterator :items="filtered" :search="inventorySearch" :loading="loading" row wrap>
 			<v-flex slot="item" slot-scope="props" class="mb-4" xs12>

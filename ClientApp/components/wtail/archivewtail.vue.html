@@ -1,5 +1,5 @@
 <template>
-	<v-layout row wrap justify-center>
+	<v-layout row wrap justify-center v-if="$vuetify.breakpoint.smAndUp">
 		<v-flex xs11>
 			<v-card>
 				<v-toolbar flat class="tabletoolbar">
@@ -15,8 +15,8 @@
 							<td>{{ props.item.supplier }}</td>
 							<td>{{ props.item.batch }}</td>
 							<td>{{ props.item.validated }}</td>
-							<td><font v-bind:style="{ color: warningColour(props.item.dateWarning) }">{{ props.item.expiry }}</font></td>
-							<td><font v-bind:style="{ color: warningColour(props.item.stockWarning) }">{{ props.item.quantity }}</font></td>
+							<td>{{ props.item.expiry }}</td>
+							<td>{{ props.item.quantity }}</td>
 						</tr>
 					</template>
 					<template slot="expand" slot-scope="props">
@@ -29,6 +29,56 @@
 				</v-data-table>
 			</v-card>
 		</v-flex>
+	</v-layout>
+	<v-layout v-else column>
+		<v-flex class="text-xs-center mb-4" xs12>
+			<h4>WTAIL Archive</h4>
+			<v-divider />
+			<v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details />
+		</v-flex>
+		<v-data-iterator :items="reagents" :search="search" :loading="loading" row wrap>
+			<v-flex slot="item" slot-scope="props" class="mb-4" xs12>
+				<v-card>
+					<v-card-title>
+						<h4>{{ props.item.name }}</h4>
+						<v-spacer />
+						<v-menu left>
+							<v-btn slot="activator" icon class="ma-0">
+								<v-icon>more_vert</v-icon>
+							</v-btn>
+							<v-list>
+								<v-list-tile v-on:click.native="deleteReagent(props.item.id)">
+									<v-list-tile-title>Delete</v-list-tile-title>
+								</v-list-tile>
+							</v-list>
+						</v-menu>
+					</v-card-title>
+					<v-divider class="ma-0" />
+					<v-list dense>
+						<v-list-tile>
+							<v-list-tile-content>Supplier:</v-list-tile-content>
+							<v-list-tile-content class="align-end">{{ props.item.supplier }}</v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile>
+							<v-list-tile-content>Batch:</v-list-tile-content>
+							<v-list-tile-content class="align-end">{{ props.item.batch }}</v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile>
+							<v-list-tile-content>Validated:</v-list-tile-content>
+							<v-list-tile-content class="align-end">{{ props.item.validated }}</v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile>
+							<v-list-tile-content>Expiry:</v-list-tile-content>
+							<v-list-tile-content class="align-end">{{ props.item.expiry }}</v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile>
+							<v-list-tile-content>Quantity:</v-list-tile-content>
+							<v-list-tile-content class="align-end">{{ props.item.quantity }}</v-list-tile-content>
+						</v-list-tile>
+					</v-list>
+				</v-card>
+			</v-flex>
+		</v-data-iterator>
 	</v-layout>
 </template>
 

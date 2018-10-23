@@ -30,15 +30,6 @@ export default class ArchivePDSComponent extends Vue {
 			});
 	}
 
-	warningColour(warning: number) {
-		switch (warning) {
-			case 1:
-				return "Orange";
-			case 2:
-				return "Red";
-		}
-	}
-
 	deleteReagent(id: number) {
 		var ans = confirm("Do you want to delete this Reagent forever?");
 		if (ans) {

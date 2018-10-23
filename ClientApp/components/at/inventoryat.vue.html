@@ -1,5 +1,5 @@
 <template>
-	<v-layout row wrap align-start justify-center>
+	<v-layout row wrap align-start justify-center v-if="$vuetify.breakpoint.smAndUp">
 		<v-flex md3 xs10 ma-2>
 			<v-card>
 				<v-toolbar flat class="tabletoolbar">
@@ -49,6 +49,76 @@
 				</v-data-table>
 			</v-card>
 		</v-flex>
+	</v-layout>
+	<v-layout v-else column>
+		<v-flex class="text-xs-center mb-4" xs12>
+			<h4>Inventory</h4>
+			<v-divider />
+			<v-card>
+				<v-toolbar flat class="tabletoolbar">
+					<v-toolbar-title>AT</v-toolbar-title>
+					<v-spacer />
+					<v-btn flat color="secondary" v-on:click.native="createReagent">Create</v-btn>
+				</v-toolbar>
+				<v-data-table :headers="reagentHeaders" :items="stocks" :loading="loading" disable-initial-sort="true" expand>
+					<v-progress-linear slot="progress" color="primary" indeterminate />
+					<template slot="items" slot-scope="props">
+						<tr @click="filterReagents(props.item.name)">
+							<td>{{ props.item.name }}</td>
+							<td>{{ props.item.minimum }}</td>
+							<td><font v-bind:style="{ color: warningColour(props.item.stockWarning) }">{{ props.item.quantity }}</font></td>
+						</tr>
+					</template>
+				</v-data-table>
+			</v-card>
+			<v-text-field v-model="inventorySearch" append-icon="search" label="Search" single-line hide-details />
+		</v-flex>
+		<v-data-iterator :items="filtered" :search="inventorySearch" :loading="loading" row wrap>
+			<v-flex slot="item" slot-scope="props" class="mb-4" xs12>
+				<v-card>
+					<v-card-title>
+						<h4>{{ props.item.name }}</h4>
+						<v-spacer />
+						<v-menu left>
+							<v-btn slot="activator" icon class="ma-0">
+								<v-icon>more_vert</v-icon>
+							</v-btn>
+							<v-list>
+								<v-list-tile v-on:click.native="editReagent(props.item.id)">
+									<v-list-tile-title>Edit</v-list-tile-title>
+								</v-list-tile>
+								<v-list-tile v-on:click.native="deleteReagent(props.item.id)">
+									<v-list-tile-title>Delete</v-list-tile-title>
+								</v-list-tile>
+							</v-list>
+						</v-menu>
+					</v-card-title>
+					<v-divider class="ma-0" />
+					<v-list dense>
+						<v-list-tile>
+							<v-list-tile-content>Supplier:</v-list-tile-content>
+							<v-list-tile-content class="align-end">{{ props.item.supplier }}</v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile>
+							<v-list-tile-content>Batch:</v-list-tile-content>
+							<v-list-tile-content class="align-end">{{ props.item.batch }}</v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile>
+							<v-list-tile-content>Validated:</v-list-tile-content>
+							<v-list-tile-content class="align-end">{{ props.item.validated }}</v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile>
+							<v-list-tile-content>Expiry:</v-list-tile-content>
+							<v-list-tile-content class="align-end"><font v-bind:style="{ color: warningColour(props.item.dateWarning) }">{{ props.item.expiry }}</font></v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile>
+							<v-list-tile-content>Quantity:</v-list-tile-content>
+							<v-list-tile-content class="align-end"><font v-bind:style="{ color: warningColour(props.item.stockWarning) }">{{ props.item.quantity }}</font></v-list-tile-content>
+						</v-list-tile>
+					</v-list>
+				</v-card>
+			</v-flex>
+		</v-data-iterator>
 	</v-layout>
 </template>
 

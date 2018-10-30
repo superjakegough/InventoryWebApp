@@ -9,8 +9,11 @@ export default class InventoryPDSComponent extends Vue {
 	stocks: Stock[] = [];
 	filtered: Reagent[] = [];
 	loading: boolean = false;
+	failed: boolean = false;
+	dialog: boolean = false;
 	reagentSearch: string = "";
 	inventorySearch: string = "";
+	selected: number = 0;
 	reagentHeaders: object[] = [
 		{ text: 'Name', value: 'name' },
 		{ text: 'Minimum', value: 'minimum' },
@@ -66,20 +69,24 @@ export default class InventoryPDSComponent extends Vue {
 		this.$router.push("/editpds/" + id);
 	}
 
-	deleteReagent(id: number) {
-		var ans = confirm("Do you want to delete this Reagent?");
-		if (ans) {
-			fetch('api/PDS/DeleteInventory?id=' + id, {
-				method: 'DELETE'
+	openDelete(selected: number) {
+		this.selected = selected;
+		this.dialog = true;
+	}
+
+	deleteReagent() {
+		this.failed = false;
+		this.dialog = true;
+		fetch('api/PDS/DeleteInventory?id=' + this.selected, {
+			method: 'DELETE'
+		})
+			.then(response => response.json() as Promise<number>)
+			.then(data => {
+				if (data < 1) {
+					this.failed = true;
+				} else {
+					this.loadInventory();
+				}
 			})
-				.then(response => response.json() as Promise<number>)
-				.then(data => {
-					if (data < 1) {
-						alert("Failed to delete reagent. Please make sure you are still connected?");
-					} else {
-						this.loadInventory();
-					}
-				})
-		}
 	}
 }

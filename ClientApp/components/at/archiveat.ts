@@ -7,6 +7,9 @@ export default class ArchiveATComponent extends Vue {
 	reagents: Reagent[] = [];
 	loading: boolean = false;
 	search: string = "";
+	failed: boolean = false;
+	dialog: boolean = false;
+	selected: number = 0;
 	headers: object[] = [
 		{ text: 'Name', value: 'name' },
 		{ text: 'Supplier', value: 'supplier' },
@@ -30,20 +33,24 @@ export default class ArchiveATComponent extends Vue {
 			});
 	}
 
-	deleteReagent(id: number) {
-		var ans = confirm("Do you want to delete this Reagent forever?");
-		if (ans) {
-			fetch('api/AT/DeleteArchive?id=' + id, {
-				method: 'DELETE'
+	openDelete(selected: number) {
+		this.selected = selected;
+		this.dialog = true;
+	}
+
+	deleteReagent() {
+		this.failed = false;
+		this.dialog = false;
+		fetch('api/AT/DeleteArchive?id=' + this.selected, {
+			method: 'DELETE'
+		})
+			.then(response => response.json() as Promise<number>)
+			.then(data => {
+				if (data < 1) {
+					this.failed = true;
+				} else {
+					this.loadArchive();
+				}
 			})
-				.then(response => response.json() as Promise<number>)
-				.then(data => {
-					if (data < 1) {
-						alert("Failed to delete reagent. Please make sure you are still connected?");
-					} else {
-						this.loadArchive();
-					}
-				})
-		}
 	}
 }

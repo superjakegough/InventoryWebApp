@@ -5,7 +5,7 @@
 				<v-toolbar flat class="tabletoolbar">
 					<v-toolbar-title>WTAIL</v-toolbar-title>
 					<v-spacer />
-					<v-btn flat color="secondary" v-on:click.native="createReagent">Create</v-btn>
+					<v-btn flat color="accent" v-on:click.native="createReagent">Create</v-btn>
 				</v-toolbar>
 				<v-data-table :headers="reagentHeaders" :items="stocks" :loading="loading" disable-initial-sort expand>
 					<v-progress-linear slot="progress" color="primary" indeterminate />
@@ -41,8 +41,8 @@
 					<template slot="expand" slot-scope="props">
 						<v-card flat="flat">
 							<v-layout justify-center>
-								<v-btn color="secondary" flat v-on:click.native="editReagent(props.item.id)">Edit</v-btn>
-								<v-btn color="secondary" flat v-on:click.native="openDelete(props.item.id)">Delete</v-btn>
+								<v-btn color="accent" flat v-on:click.native="editReagent(props.item.id)">Edit</v-btn>
+								<v-btn color="accent" flat v-on:click.native="openDelete(props.item.id)">Delete</v-btn>
 							</v-layout>
 						</v-card>
 					</template>
@@ -72,7 +72,7 @@
 				<v-toolbar flat class="tabletoolbar">
 					<v-toolbar-title>WTAIL</v-toolbar-title>
 					<v-spacer />
-					<v-btn flat color="secondary" v-on:click.native="createReagent">Create</v-btn>
+					<v-btn flat color="accent" v-on:click.native="createReagent">Create</v-btn>
 				</v-toolbar>
 				<v-data-table :headers="reagentHeaders" :items="stocks" :loading="loading" disable-initial-sort expand>
 					<v-progress-linear slot="progress" color="primary" indeterminate />

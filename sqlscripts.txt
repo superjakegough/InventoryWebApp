@@ -1,6 +1,6 @@
 USE master;    
 CREATE DATABASE InventoryWebAppDB  
-ON (NAME = InventoryWebAppDB, FILENAME = 'C:\Source\InventoryWebApp\InventoryWebApp\InventoryWebAppDB.mdf');
+ON (NAME = InventoryWebAppDB, FILENAME = 'C:\Source\InventoryWebApp\InventoryWebAppDB.mdf');
 
 CREATE TABLE [dbo].[ATArchiveTable] (
     [Id]        INT            NOT NULL,

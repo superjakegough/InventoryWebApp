@@ -1,0 +1,69 @@
+USE master;    
+CREATE DATABASE InventoryWebAppDB  
+ON (NAME = InventoryWebAppDB, FILENAME = 'C:\Source\InventoryWebApp\InventoryWebApp\InventoryWebAppDB.mdf');
+
+CREATE TABLE [dbo].[ATArchiveTable] (
+    [Id]        INT            NOT NULL,
+    [Name]      NVARCHAR (MAX) NOT NULL,
+    [Supplier]  NVARCHAR (MAX) NOT NULL,
+    [Batch]     NVARCHAR (MAX) NOT NULL,
+    [Validated] NVARCHAR (MAX) NOT NULL,
+    [Expiry]    NVARCHAR (MAX) NOT NULL,
+    [Quantity]  INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[ATInventoryTable] (
+    [Id]        INT            IDENTITY (1, 1) NOT NULL,
+    [Name]      NVARCHAR (MAX) NOT NULL,
+    [Supplier]  NVARCHAR (MAX) NOT NULL,
+    [Batch]     NVARCHAR (MAX) NOT NULL,
+    [Validated] NVARCHAR (MAX) NOT NULL,
+    [Expiry]    NVARCHAR (MAX) NOT NULL,
+    [Quantity]  INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[PDSArchiveTable] (
+    [Id]        INT            NOT NULL,
+    [Name]      NVARCHAR (MAX) NOT NULL,
+    [Supplier]  NVARCHAR (MAX) NOT NULL,
+    [Batch]     NVARCHAR (MAX) NOT NULL,
+    [Validated] NVARCHAR (MAX) NOT NULL,
+    [Expiry]    NVARCHAR (MAX) NOT NULL,
+    [Quantity]  INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[PDSInventoryTable] (
+    [Id]        INT            IDENTITY (1, 1) NOT NULL,
+    [Name]      NVARCHAR (MAX) NOT NULL,
+    [Supplier]  NVARCHAR (MAX) NOT NULL,
+    [Batch]     NVARCHAR (MAX) NOT NULL,
+    [Validated] NVARCHAR (MAX) NOT NULL,
+    [Expiry]    NVARCHAR (MAX) NOT NULL,
+    [Quantity]  INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[WTAILArchiveTable] (
+    [Id]        INT            NOT NULL,
+    [Name]      NVARCHAR (MAX) NOT NULL,
+    [Supplier]  NVARCHAR (MAX) NOT NULL,
+    [Batch]     NVARCHAR (MAX) NOT NULL,
+    [Validated] NVARCHAR (MAX) NOT NULL,
+    [Expiry]    NVARCHAR (MAX) NOT NULL,
+    [Quantity]  INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[WTAILInventoryTable] (
+    [Id]        INT            IDENTITY (1, 1) NOT NULL,
+    [Name]      NVARCHAR (MAX) NOT NULL,
+    [Supplier]  NVARCHAR (MAX) NOT NULL,
+    [Batch]     NVARCHAR (MAX) NOT NULL,
+    [Validated] NVARCHAR (MAX) NOT NULL,
+    [Expiry]    NVARCHAR (MAX) NOT NULL,
+    [Quantity]  INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);

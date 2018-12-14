@@ -5,8 +5,6 @@
 	batch: string;
 	validated: string;
 	expiry: string;
-	minimum: number;
 	quantity: number;
-	stockWarning: number;
 	dateWarning: number;
 }

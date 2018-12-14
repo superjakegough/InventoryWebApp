@@ -1,8 +1,8 @@
-<template>
+﻿<template>
 	<v-layout justify-center text-xs-center>
-		<v-flex lg4 md5 sm6 xs8>
+		<v-flex lg4 md6 sm8 xs12>
 			<v-form ref="form" lazy-validation v-if="!loading">
-				<h3>Edit AT Reagent</h3>
+				<p class="title">Edit AT Reagent</p>
 				<v-text-field v-model="after.name" label="Name" :rules="[rules.required]" box disabled />
 				<v-text-field v-model="after.supplier" label="Supplier" :rules="[rules.required]" box disabled />
 				<v-text-field v-model="after.batch" label="Batch" :rules="[rules.required]" box disabled />
